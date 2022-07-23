@@ -33,6 +33,10 @@ const Authentication = () => {
     };
 
     useEffect(() => {
+        //   if () {
+        // if there is a query param that referrer = home
+        // navigate("/home")
+        // }
         if (localStorage.getItem("accessToken")) {
             const userType = localStorage.getItem("userTypes");
             redirectToPage(userType);
