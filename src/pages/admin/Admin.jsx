@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Customer = () => {
+const Admin = () => {
     const navigate = useNavigate();
 
     const logoutFn = () => {
@@ -11,7 +11,7 @@ const Customer = () => {
 
     return (
         <div>
-            <h1>This is Customer page</h1>
+            <h1>This is Admin page</h1>
 
             <button className='btn btn-primary' onClick={logoutFn}>
                 Logout
@@ -19,4 +19,4 @@ const Customer = () => {
         </div>
     );
 };
-export default Customer;
+export default Admin;

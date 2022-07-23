@@ -6,6 +6,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Authentication from "./pages/authentication/Authentication.jsx";
 import Customer from "./pages/customer/Customer.jsx";
+import Client from "./pages/client/Client.jsx";
+import Admin from "./pages/admin/Admin.jsx";
 
 function App() {
     return (
@@ -13,6 +15,8 @@ function App() {
             <Routes>
                 <Route path='/login' element={<Authentication />} />
                 <Route path='/customer' element={<Customer />} />
+                <Route path='/client' element={<Client />} />
+                <Route path='/admin' element={<Admin />} />
             </Routes>
         </div>
     );

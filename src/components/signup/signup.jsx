@@ -17,7 +17,7 @@ const Signup = props => {
         // 2. call the onSignupSubmit with data
         // 3. e. prevent default to prevent submit
 
-        const data = { userId, password, userName, email, userType };
+        const data = { userId, password, name: userName, email, userType };
         onSignupSubmit(data);
         e.preventDefault();
     };
