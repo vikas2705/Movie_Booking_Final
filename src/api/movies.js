@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://relevel-movie-booking-app-be.herokuapp.com/";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const getAllMovies = async () => {
     const postUrl = `${BASE_URL}/mba/api/v1/movies`;

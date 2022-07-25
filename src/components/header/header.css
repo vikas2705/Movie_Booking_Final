@@ -2,3 +2,10 @@
 .remove-underline{
   text-decoration: none;
 }
+.custom-input{
+  height: 50px;
+  width: 300px;
+}
+.searchBtn{
+  height: 50px;
+}
