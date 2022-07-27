@@ -15,8 +15,6 @@ const Home = () => {
     const [movies, setMovies] = useState([]);
     const [isLoading, setLoading] = useState(false);
 
-    console.log("Helloooooo");
-
     useEffect(() => {
         setLoading(true);
         getAllMovies()
@@ -42,7 +40,10 @@ const Home = () => {
 
     return (
         <div>
-            <Header filterMoviesBySearch={filterMoviesBySearch} />
+            <Header
+                filterMoviesBySearch={filterMoviesBySearch}
+                showSearch={true}
+            />
 
             <ImageCarousel images={[img1, img2, img3, img4]} />
 

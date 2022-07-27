@@ -4,7 +4,7 @@ import { CButton } from "@coreui/react";
 import "./header.css";
 
 const Header = props => {
-    const { filterMoviesBySearch } = props;
+    const { filterMoviesBySearch, showSearch } = props;
     const navigate = useNavigate();
     const [searchText, setSearchText] = useState("");
 
@@ -38,24 +38,26 @@ const Header = props => {
                 </a>
             </div>
 
-            <form className='d-flex' onSubmit={searchFn}>
-                <input
-                    type='text'
-                    className='custom-input'
-                    value={searchText}
-                    onChange={e => {
-                        setSearchText(e.target.value);
-                    }}
-                    placeholder={"Enter movie name"}
-                />
-                <CButton
-                    type='submit'
-                    color='danger'
-                    className='px-3 searchBtn'
-                >
-                    Search
-                </CButton>
-            </form>
+            {showSearch && (
+                <form className='d-flex' onSubmit={searchFn}>
+                    <input
+                        type='text'
+                        className='custom-input'
+                        value={searchText}
+                        onChange={e => {
+                            setSearchText(e.target.value);
+                        }}
+                        placeholder={"Enter movie name"}
+                    />
+                    <CButton
+                        type='submit'
+                        color='danger'
+                        className='px-3 searchBtn'
+                    >
+                        Search
+                    </CButton>
+                </form>
+            )}
 
             {isUserLoggedIn ? (
                 <CButton
