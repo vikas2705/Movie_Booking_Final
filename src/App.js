@@ -9,6 +9,7 @@ import Customer from "./pages/customer/Customer.jsx";
 import Client from "./pages/client/Client.jsx";
 import Admin from "./pages/admin/Admin.jsx";
 import Home from "./pages/home/Home";
+import MovieDetail from "./pages/movie-detail/MovieDetail";
 
 function App() {
     return (
@@ -19,6 +20,10 @@ function App() {
                 <Route path='/customer' element={<Customer />} />
                 <Route path='/client' element={<Client />} />
                 <Route path='/admin' element={<Admin />} />
+                <Route
+                    path='/movie-detail/:movieId'
+                    element={<MovieDetail />}
+                />
             </Routes>
         </div>
     );

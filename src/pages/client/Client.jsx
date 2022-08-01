@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
+import MoviesList from "../../components/movies-list/MoviesList";
 import TheatresList from "../../components/theatres-list/TheatresList";
 
 import "./client.css";
@@ -15,6 +16,7 @@ const Client = () => {
                 <h4>Please check these products below</h4>
 
                 <TheatresList />
+                <MoviesList />
             </div>
 
             <Footer />

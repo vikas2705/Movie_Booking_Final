@@ -9,11 +9,13 @@ import Footer from "../../components/footer/Footer.jsx";
 import "./home.css";
 import { getAllMovies } from "../../api/movies";
 import Loader from "../../components/loader/Loader.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const [allmovies, setAllMovies] = useState([]);
     const [movies, setMovies] = useState([]);
     const [isLoading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -38,6 +40,10 @@ const Home = () => {
         setMovies(filteredMovies);
     };
 
+    const handleGotoDetailPage = movieId => {
+        navigate(`/movie-detail/${movieId}`);
+    };
+
     return (
         <div>
             <Header
@@ -54,7 +60,12 @@ const Home = () => {
                     <div className='row  '>
                         {movies.map(movie => {
                             return (
-                                <div className='col-lg-3 col-md-4 col-sm-6 movie-tile bg-dark text-light'>
+                                <div
+                                    className='col-lg-3 col-md-4 col-sm-6 movie-tile bg-dark text-light'
+                                    onClick={() => {
+                                        handleGotoDetailPage(movie._id);
+                                    }}
+                                >
                                     <img
                                         src={movie.posterUrl}
                                         alt='poster'
