@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getMovieDetails } from "../../api/movies";
 import ReactPlayer from "react-player";
 import Header from "../../components/header/Header";
@@ -13,6 +13,7 @@ const MovieDetail = () => {
     const { movieId } = params;
 
     useEffect(() => {
+        //componentDidMount
         fetchMovieDetail(movieId);
     }, []);
 
@@ -30,13 +31,32 @@ const MovieDetail = () => {
             });
     };
 
+    // give default empty string values to variables if they are undefined
+    const {
+        trailerUrl = "",
+        posterUrl = "",
+        name = "",
+        description = "",
+        director = "",
+        releaseDate = "",
+        casts = [],
+        _id = "",
+        releaseStatus,
+    } = movieDetail;
+
+    const buttonText =
+        releaseStatus === "RELEASED" ? "BOOK TICKETS" : "COMING SOON";
+
+    const buttonUrl =
+        releaseStatus === "RELEASED" ? `/buyTickets/${name}/${_id}` : "#";
+
     return (
         <div className='movie-detail bg-light'>
             <Header />
 
             <div className='video-player d-flex justify-content-center'>
                 <ReactPlayer
-                    url={"https://youtu.be/BUjXzrgntcY"}
+                    url={trailerUrl}
                     controls
                     className='videop'
                     width='70%'
@@ -47,18 +67,33 @@ const MovieDetail = () => {
                 <div className='row'>
                     <div className='col'>
                         <img
-                            src='https://images.news18.com/ibnlive/uploads/2022/06/anuritta-jha-1.jpg'
+                            src={posterUrl}
                             className='movie-poster'
                             alt='movie poster'
                             width='50%'
                         />
                     </div>
                     <div className='col'>
-                        <h2>Bramhastra</h2>
+                        <h2>{name}</h2>
+                        <h4>{description}</h4>
 
-                        <h4>lorem ipsum random text </h4>
+                        <hr />
 
-                        <h5>Release Date: 25th July, 2022</h5>
+                        <h5>Directed by: {director}</h5>
+                        <h5>Release Date: {releaseDate}</h5>
+
+                        <hr />
+
+                        <h4>Casts</h4>
+                        {casts.map(cast => {
+                            return <h5 key={cast}>{cast}</h5>;
+                        })}
+
+                        <hr />
+
+                        <Link className='btn btn-danger' to={buttonUrl}>
+                            {buttonText}
+                        </Link>
                     </div>
                 </div>
             </div>

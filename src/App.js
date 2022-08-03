@@ -10,6 +10,7 @@ import Client from "./pages/client/Client.jsx";
 import Admin from "./pages/admin/Admin.jsx";
 import Home from "./pages/home/Home";
 import MovieDetail from "./pages/movie-detail/MovieDetail";
+import SelectTheatre from "./pages/select-theatre/SelectTheatre";
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                 <Route
                     path='/movie-detail/:movieId'
                     element={<MovieDetail />}
+                />
+                <Route
+                    path='/buyTickets/:movieName/:movieId'
+                    element={<SelectTheatre />}
                 />
             </Routes>
         </div>
