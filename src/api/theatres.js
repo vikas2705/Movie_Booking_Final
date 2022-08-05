@@ -15,3 +15,12 @@ export const updateTheatre = async (theatreId, theatreData) => {
         },
     });
 };
+
+export const getTheaterById = async theatreId => {
+    const url = `${BASE_URL}/mba/api/v1/theatres/${theatreId}`;
+    return await axios.get(url, {
+        headers: {
+            "x-access-token": localStorage.getItem("accessToken"),
+        },
+    });
+};

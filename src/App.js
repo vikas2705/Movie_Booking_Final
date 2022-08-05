@@ -11,6 +11,7 @@ import Admin from "./pages/admin/Admin.jsx";
 import Home from "./pages/home/Home";
 import MovieDetail from "./pages/movie-detail/MovieDetail";
 import SelectTheatre from "./pages/select-theatre/SelectTheatre";
+import SelectSeats from "./pages/select-seats/SelectSeats";
 
 function App() {
     return (
@@ -26,8 +27,13 @@ function App() {
                     element={<MovieDetail />}
                 />
                 <Route
-                    path='/buyTickets/:movieName/:movieId'
+                    path='/buy-tickets/:movieName/:movieId'
                     element={<SelectTheatre />}
+                />
+
+                <Route
+                    path='/select-seats/:movieId/:theatreId'
+                    element={<SelectSeats />}
                 />
             </Routes>
         </div>

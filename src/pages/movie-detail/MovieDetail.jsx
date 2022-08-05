@@ -48,7 +48,7 @@ const MovieDetail = () => {
         releaseStatus === "RELEASED" ? "BOOK TICKETS" : "COMING SOON";
 
     const buttonUrl =
-        releaseStatus === "RELEASED" ? `/buyTickets/${name}/${_id}` : "#";
+        releaseStatus === "RELEASED" ? `/buy-tickets/${name}/${_id}` : "#";
 
     return (
         <div className='movie-detail bg-light'>

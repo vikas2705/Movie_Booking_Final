@@ -91,7 +91,7 @@ const SelectTheatre = () => {
 
                         return (
                             <Link
-                                to={`/movie/${movieId}/${_id}`}
+                                to={`/select-seats/${movieId}/${_id}`}
                                 className='theatre-item row p-4'
                             >
                                 <h4 className='col-sm-4'>{name}</h4>
@@ -100,7 +100,6 @@ const SelectTheatre = () => {
                                     m-Ticket
                                 </h4>
                                 <h4 className='text-success col-sm-4'>
-                                    <i className='bi bi-cup-straw text-success'></i>
                                     Food & Beverages
                                 </h4>
                             </Link>

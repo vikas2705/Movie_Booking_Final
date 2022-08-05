@@ -1,0 +1,17 @@
+.seat{
+    width: 30px;
+    height: 25px;
+    margin: 5px 10px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    background-color: grey;
+    cursor: pointer;
+}
+
+.selected{
+    background-color: red;
+}
+
+.occupied{
+    background-color: white;
+}
