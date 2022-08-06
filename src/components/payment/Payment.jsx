@@ -13,6 +13,7 @@ const Payment = props => {
         handleConfirmPayment,
         paymentSuccessful,
         setPaymentSuccessful,
+        handlePostPayment,
     } = props;
 
     return (
@@ -31,7 +32,9 @@ const Payment = props => {
                     <Modal.Header>
                         <Modal.Title>
                             <div className='p-2'>
-                                Please confirm your booking details
+                                {paymentSuccessful
+                                    ? "Congratulations, Booking Confirmed!!"
+                                    : "Please confirm your booking details"}
                             </div>
                         </Modal.Title>
                     </Modal.Header>
@@ -42,9 +45,6 @@ const Payment = props => {
                                 <div className='d-flex justify-content-center text-align-center'>
                                     <div className='payment-successful'>
                                         <img alt='' src={successful} />
-                                        <h4>
-                                            Congratulations, Booking Confirmed!!
-                                        </h4>
                                     </div>
                                 </div>
                                 <hr />
@@ -96,8 +96,7 @@ const Payment = props => {
                             <button
                                 className='btn btn-danger'
                                 onClick={() => {
-                                    setConfirmationModal(false);
-                                    setPaymentSuccessful(false);
+                                    handlePostPayment();
                                 }}
                             >
                                 Close

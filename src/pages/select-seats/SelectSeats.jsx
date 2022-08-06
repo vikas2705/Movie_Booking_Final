@@ -10,7 +10,7 @@ import SeatGuide from "../../components/seat-guide/SeatGuide";
 import "./selectSeats.css";
 import Payment from "../../components/payment/Payment";
 import { createNewBooking, makePaymentForBooking } from "../../api/booking";
-import { TICKET_PRICE } from "../../constants/config";
+import { DEFAULT_OCCUPIED_SEATS, TICKET_PRICE } from "../../constants/config";
 
 const SelectSeats = () => {
     const params = useParams();
@@ -19,6 +19,7 @@ const SelectSeats = () => {
     const [theatreDetail, setTheatreDetail] = useState({});
     const [confirmationModal, setConfirmationModal] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [occupiedSeats, setOccupiedSeats] = useState(DEFAULT_OCCUPIED_SEATS);
     const [bookingDetail, setBookingDetail] = useState({});
     const [paymentDetail, setPaymentDetail] = useState({});
     const [paymentSuccessful, setPaymentSuccessful] = useState(false);
@@ -41,6 +42,23 @@ const SelectSeats = () => {
             setPaymentDetail(data);
             setPaymentSuccessful(true);
         }
+    };
+
+    const handlePostPayment = () => {
+        /* after completing the payment
+        1. close modal
+        2. push the selected seats to occupied seats
+        3. empty the selected seats
+        4. set payment successful to false
+        */
+        setConfirmationModal(false);
+        const tempOccupiedSeats = [...occupiedSeats];
+        selectedSeats.forEach(seat => {
+            tempOccupiedSeats.push(seat);
+        });
+        setOccupiedSeats(tempOccupiedSeats);
+        setSelectedSeats([]);
+        setPaymentSuccessful(false);
     };
 
     const createBooking = async () => {
@@ -108,6 +126,7 @@ const SelectSeats = () => {
                     createBooking={createBooking}
                     setSelectedSeats={setSelectedSeats}
                     selectedSeats={selectedSeats}
+                    occupiedSeats={occupiedSeats}
                 />
 
                 <Payment
@@ -119,6 +138,7 @@ const SelectSeats = () => {
                     handleConfirmPayment={handleConfirmPayment}
                     paymentSuccessful={paymentSuccessful}
                     setPaymentSuccessful={setPaymentSuccessful}
+                    handlePostPayment={handlePostPayment}
                 />
             </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TICKET_PRICE } from "../../constants/config";
 import {
     getSeatNumber,
@@ -9,10 +9,19 @@ import SelectedSeats from "../selected-seats/SelectedSeats";
 import "./cinema.css";
 
 const Cinema = props => {
-    const { createBooking, setSelectedSeats, selectedSeats } = props;
+    const { createBooking, setSelectedSeats, selectedSeats, occupiedSeats } =
+        props;
     const [cinemaState, setCinemaState] = useState(
-        getTheatre2DRepresentation()
+        getTheatre2DRepresentation(selectedSeats, occupiedSeats)
     );
+
+    useEffect(() => {
+        const newState = getTheatre2DRepresentation(
+            selectedSeats,
+            occupiedSeats
+        );
+        setCinemaState(newState);
+    }, [selectedSeats, occupiedSeats]);
 
     const handleSelectSeat = (rowIndex, colIndex) => {
         const currentStatus = cinemaState[rowIndex][colIndex];
