@@ -25,7 +25,7 @@ export const getTheatre2DRepresentation = (selectedSeats = []) => {
                 rowArr.push("available");
             }
 
-            // [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
+            // [available, available, available, available, available, available, available, available]
         }
 
         seats.push(rowArr);
@@ -55,14 +55,14 @@ export const getTheatre2DRepresentation = (selectedSeats = []) => {
 // rowIndex * ROWS_COUNT + (colIndex + 1) == SeatNo
 /*
         [
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-            [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
+            [available, available, available, available, available, available, available, available]
         ]
         */
 
@@ -85,7 +85,7 @@ export const getTheatre2DRepresentation = (selectedSeats = []) => {
 [X, X, X, X, X, X, X, X]
 
 
-undefined-- - available
+available-- - available
 
 "selected"
 

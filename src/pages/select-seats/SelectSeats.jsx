@@ -8,12 +8,15 @@ import Header from "../../components/header/Header";
 import Screen from "../../components/screen/Screen";
 import SeatGuide from "../../components/seat-guide/SeatGuide";
 import "./selectSeats.css";
+import Payment from "../../components/payment/Payment";
 
 const SelectSeats = () => {
     const params = useParams();
     const { movieId, theatreId } = params;
     const [movieDetail, setMovieDetail] = useState({});
     const [theatreDetail, setTheatreDetail] = useState({});
+    const [confirmationModal, setConfirmationModal] = useState(false);
+    const [selectedSeats, setSelectedSeats] = useState([]);
 
     useEffect(() => {
         fetchMovieDetails(movieId);
@@ -32,6 +35,11 @@ const SelectSeats = () => {
             .catch(err => {
                 console.log(err.message);
             });
+    };
+
+    const handleConfirmTransaction = () => {
+        // create the booking
+        // make the payment
     };
 
     const fetchTheatreDetails = theatreId => {
@@ -55,13 +63,26 @@ const SelectSeats = () => {
         <div>
             <Header />
 
-            <div className='select-seats-main vh-100 p-5'>
+            <div className='select-seats-main p-5'>
                 <h2>
                     {movieName}-{theatreName}
                 </h2>
                 <SeatGuide />
                 <Screen />
-                <Cinema />
+                <Cinema
+                    setConfirmationModal={setConfirmationModal}
+                    setSelectedSeats={setSelectedSeats}
+                    selectedSeats={selectedSeats}
+                />
+
+                <Payment
+                    confirmationModal={confirmationModal}
+                    setConfirmationModal={setConfirmationModal}
+                    selectedSeats={selectedSeats}
+                    movieName={movieName}
+                    theatreName={theatreName}
+                    handleConfirmTransaction={handleConfirmTransaction}
+                />
             </div>
 
             <Footer />
