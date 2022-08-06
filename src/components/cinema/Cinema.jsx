@@ -9,7 +9,7 @@ import SelectedSeats from "../selected-seats/SelectedSeats";
 import "./cinema.css";
 
 const Cinema = props => {
-    const { setConfirmationModal, setSelectedSeats, selectedSeats } = props;
+    const { createBooking, setSelectedSeats, selectedSeats } = props;
     const [cinemaState, setCinemaState] = useState(
         getTheatre2DRepresentation()
     );
@@ -40,7 +40,7 @@ const Cinema = props => {
     };
 
     const handleProceedToPayment = () => {
-        setConfirmationModal(true);
+        createBooking();
     };
 
     return (

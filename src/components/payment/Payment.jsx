@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-
 import { TICKET_PRICE } from "../../constants/config";
+import successful from "../../assets/simpson.gif";
 
 const Payment = props => {
     const {
@@ -10,7 +10,9 @@ const Payment = props => {
         selectedSeats = [],
         movieName,
         theatreName,
-        handleConfirmTransaction = () => {},
+        handleConfirmPayment,
+        paymentSuccessful,
+        setPaymentSuccessful,
     } = props;
 
     return (
@@ -20,6 +22,7 @@ const Payment = props => {
                     show={confirmationModal}
                     onHide={() => {
                         setConfirmationModal(false);
+                        setPaymentSuccessful(false);
                     }}
                     backdrop='static'
                     keyboard={false}
@@ -34,6 +37,19 @@ const Payment = props => {
                     </Modal.Header>
 
                     <Modal.Body>
+                        {paymentSuccessful && (
+                            <>
+                                <div className='d-flex justify-content-center text-align-center'>
+                                    <div className='payment-successful'>
+                                        <img alt='' src={successful} />
+                                        <h4>
+                                            Congratulations, Booking Confirmed!!
+                                        </h4>
+                                    </div>
+                                </div>
+                                <hr />
+                            </>
+                        )}
                         <div className='row p-2'>
                             <div className='col-sm-4'>Movie Name: </div>
                             <div className='col-sm-8'>{movieName}</div>
@@ -57,21 +73,36 @@ const Payment = props => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <button
-                            className='btn btn-secondary'
-                            onClick={() => {
-                                setConfirmationModal(false);
-                            }}
-                        >
-                            Cancel
-                        </button>
-
-                        <button
-                            className='btn btn-danger'
-                            onClick={handleConfirmTransaction}
-                        >
-                            Confirm
-                        </button>
+                        {!paymentSuccessful && (
+                            <>
+                                <button
+                                    className='btn btn-secondary'
+                                    onClick={() => {
+                                        setConfirmationModal(false);
+                                        setPaymentSuccessful(false);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className='btn btn-danger'
+                                    onClick={handleConfirmPayment}
+                                >
+                                    Confirm
+                                </button>
+                            </>
+                        )}
+                        {paymentSuccessful && (
+                            <button
+                                className='btn btn-danger'
+                                onClick={() => {
+                                    setConfirmationModal(false);
+                                    setPaymentSuccessful(false);
+                                }}
+                            >
+                                Close
+                            </button>
+                        )}
                     </Modal.Footer>
                 </Modal>
             )}

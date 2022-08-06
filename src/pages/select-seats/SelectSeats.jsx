@@ -9,6 +9,8 @@ import Screen from "../../components/screen/Screen";
 import SeatGuide from "../../components/seat-guide/SeatGuide";
 import "./selectSeats.css";
 import Payment from "../../components/payment/Payment";
+import { createNewBooking, makePaymentForBooking } from "../../api/booking";
+import { TICKET_PRICE } from "../../constants/config";
 
 const SelectSeats = () => {
     const params = useParams();
@@ -17,11 +19,49 @@ const SelectSeats = () => {
     const [theatreDetail, setTheatreDetail] = useState({});
     const [confirmationModal, setConfirmationModal] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [bookingDetail, setBookingDetail] = useState({});
+    const [paymentDetail, setPaymentDetail] = useState({});
+    const [paymentSuccessful, setPaymentSuccessful] = useState(false);
 
     useEffect(() => {
         fetchMovieDetails(movieId);
         fetchTheatreDetails(theatreId);
     }, []);
+
+    const handleConfirmPayment = async () => {
+        const paymentData = {
+            bookingId: bookingDetail._id,
+            amount: TICKET_PRICE * selectedSeats.length,
+        };
+
+        const res = await makePaymentForBooking(paymentData);
+        console.log(res);
+        const { data, status } = res;
+        if (status === 201) {
+            setPaymentDetail(data);
+            setPaymentSuccessful(true);
+        }
+    };
+
+    const createBooking = async () => {
+        const bookingData = {
+            theatreId,
+            movieId,
+            noOfSeats: selectedSeats.length,
+            timing: new Date().toLocaleString(),
+        };
+
+        const res = await createNewBooking(bookingData);
+        console.log(res);
+        const { data, status } = res;
+        if (status === 201) {
+            setBookingDetail(data);
+        }
+        setConfirmationModal(true);
+        setPaymentSuccessful(false);
+        // api call to create  a new booking
+        // show the booking modal
+    };
 
     const fetchMovieDetails = movieId => {
         getMovieDetails(movieId)
@@ -35,11 +75,6 @@ const SelectSeats = () => {
             .catch(err => {
                 console.log(err.message);
             });
-    };
-
-    const handleConfirmTransaction = () => {
-        // create the booking
-        // make the payment
     };
 
     const fetchTheatreDetails = theatreId => {
@@ -70,7 +105,7 @@ const SelectSeats = () => {
                 <SeatGuide />
                 <Screen />
                 <Cinema
-                    setConfirmationModal={setConfirmationModal}
+                    createBooking={createBooking}
                     setSelectedSeats={setSelectedSeats}
                     selectedSeats={selectedSeats}
                 />
@@ -81,7 +116,9 @@ const SelectSeats = () => {
                     selectedSeats={selectedSeats}
                     movieName={movieName}
                     theatreName={theatreName}
-                    handleConfirmTransaction={handleConfirmTransaction}
+                    handleConfirmPayment={handleConfirmPayment}
+                    paymentSuccessful={paymentSuccessful}
+                    setPaymentSuccessful={setPaymentSuccessful}
                 />
             </div>
 
