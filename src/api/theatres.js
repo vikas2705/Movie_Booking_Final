@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AxiosInstance } from "../utils/AxiosInstance";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -16,11 +17,13 @@ export const updateTheatre = async (theatreId, theatreData) => {
     });
 };
 
-export const getTheaterById = async theatreId => {
-    const url = `${BASE_URL}/mba/api/v1/theatres/${theatreId}`;
-    return await axios.get(url, {
-        headers: {
-            "x-access-token": localStorage.getItem("accessToken"),
-        },
-    });
+export const getTheaterById = async cinemaId => {
+    const URL = `/mba/api/v1/theatres/${cinemaId}`;
+
+    try {
+        return await AxiosInstance.get(URL);
+    } catch (error) {
+        console.log(error);
+        return error.response;
+    }
 };
