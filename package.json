@@ -2,6 +2,10 @@
   "name": "moviebooking-final",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.14.2",
+    "npm": "8.6.0"
+  },
   "dependencies": {
     "@coreui/coreui": "^4.1.6",
     "@coreui/icons": "^2.1.0",
