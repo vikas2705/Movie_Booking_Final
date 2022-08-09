@@ -11,7 +11,7 @@ export const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
     async config => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("accessToken");
         if (token) {
             config.headers.common["x-access-token"] = `${token}`;
         }
