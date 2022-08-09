@@ -11,6 +11,8 @@ import Home from "./pages/home/Home";
 import MovieDetail from "./pages/movie-detail/MovieDetail";
 import SelectTheatre from "./pages/select-theatre/SelectTheatre";
 import SelectSeats from "./pages/select-seats/SelectSeats";
+import Unauthorised403 from "./components/unauthorised/Unauthorised403";
+import RequireAuth from "./components/require-auth/RequireAuth";
 
 function App() {
     return (
@@ -20,6 +22,7 @@ function App() {
                 <Route path='/login' element={<Authentication />} />
                 <Route path='/client' element={<Client />} />
                 <Route path='/admin' element={<Admin />} />
+                <Route path='/unauthorised' element={<Unauthorised403 />} />
                 <Route
                     path='/movie-detail/:movieId'
                     element={<MovieDetail />}
@@ -29,10 +32,12 @@ function App() {
                     element={<SelectTheatre />}
                 />
 
-                <Route
-                    path='/select-seats/:movieId/:theatreId'
-                    element={<SelectSeats />}
-                />
+                <Route element={<RequireAuth allowedRoles={["CUSTOMER"]} />}>
+                    <Route
+                        path='/select-seats/:movieId/:theatreId'
+                        element={<SelectSeats />}
+                    />
+                </Route>
             </Routes>
         </div>
     );
