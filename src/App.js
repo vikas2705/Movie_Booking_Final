@@ -13,6 +13,7 @@ import SelectTheatre from "./pages/select-theatre/SelectTheatre";
 import SelectSeats from "./pages/select-seats/SelectSeats";
 import Unauthorised403 from "./components/unauthorised/Unauthorised403";
 import RequireAuth from "./components/require-auth/RequireAuth";
+import Practise from "./pages/practise";
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
                 <Route path='/login' element={<Authentication />} />
                 <Route path='/client' element={<Client />} />
                 <Route path='/admin' element={<Admin />} />
+                <Route path='/practise' element={<Practise />} />
+
                 <Route path='/unauthorised' element={<Unauthorised403 />} />
                 <Route
                     path='/movie-detail/:movieId'
